@@ -31,8 +31,10 @@
 // http://arduino.cc/en/Hacking/PinMapping168 for the 'raw' pin mapping
 
 #define IRpin_PIN      PINC
-
 #define IRpin          0
+
+#define greenLED_PIN 13
+#define redLED_PIN  12
 
 
 
@@ -77,7 +79,8 @@ void setup(void) {
   Serial.begin(9600);
 
   Serial.println("Ready to decode IR!");
-
+  pinMode(greenLED_PIN, OUTPUT);
+  pinMode(redLED_PIN, OUTPUT);
 }
 
 
@@ -123,11 +126,14 @@ void loop(void) {
     if (IRcompare(numberpulses, OneButton,sizeof(OneButton)/4)) {
 
     Serial.println("1Button");
-
+    digitalWrite(greenLED_PIN, HIGH);
+    digitalWrite(redLED_PIN, LOW);
   }
     if (IRcompare(numberpulses, TwoButton,sizeof(TwoButton)/4)) {
 
     Serial.println("2Button");
+    digitalWrite(greenLED_PIN, LOW);
+    digitalWrite(redLED_PIN, HIGH);
 
   }
 
