@@ -71,6 +71,7 @@ uint8_t currentpulse = 0; // index for pulses we're storing
 
 
 #include "ircodes.h"
+#include "Motor.h"
 
 
 
@@ -81,6 +82,7 @@ void setup(void) {
   Serial.println("Ready to decode IR!");
   pinMode(greenLED_PIN, OUTPUT);
   pinMode(redLED_PIN, OUTPUT);
+  MotorSetup();
 }
 
 
@@ -128,13 +130,14 @@ void loop(void) {
     Serial.println("1Button");
     digitalWrite(greenLED_PIN, HIGH);
     digitalWrite(redLED_PIN, LOW);
+    CCW();
   }
     if (IRcompare(numberpulses, TwoButton,sizeof(TwoButton)/4)) {
 
     Serial.println("2Button");
     digitalWrite(greenLED_PIN, LOW);
     digitalWrite(redLED_PIN, HIGH);
-
+    CW();
   }
 
   delay(500);
