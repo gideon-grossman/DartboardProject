@@ -58,7 +58,7 @@
 
 // What percent we will allow in variation to match the same code
 
-#define FUZZINESS 20
+#define FUZZINESS 10;
 
 
 
@@ -131,6 +131,7 @@ void loop(void) {
     digitalWrite(greenLED_PIN, HIGH);
     digitalWrite(redLED_PIN, LOW);
     CCW();
+    digitalWrite(greenLED_PIN, LOW);
   }
     if (IRcompare(numberpulses, TwoButton,sizeof(TwoButton)/4)) {
 
@@ -138,6 +139,7 @@ void loop(void) {
     digitalWrite(greenLED_PIN, LOW);
     digitalWrite(redLED_PIN, HIGH);
     CW();
+    digitalWrite(redLED_PIN, LOW);
   }
 
   delay(500);
