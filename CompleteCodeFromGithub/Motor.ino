@@ -28,7 +28,7 @@ void RecoverFromISD()
   digitalWrite(STBY, HIGH);
 }
 
-void CCW() {
+void CCW1() {
   RecoverFromISD();
   digitalWrite(STBY, HIGH);
   digitalWrite(IN2, LOW);
@@ -38,7 +38,7 @@ void CCW() {
   Brake();
 }
 
-void CW() {
+void CW1() {
   RecoverFromISD();
   digitalWrite(STBY, HIGH);
   digitalWrite(IN1, LOW);

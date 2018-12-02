@@ -58,7 +58,7 @@
 
 // What percent we will allow in variation to match the same code
 
-#define FUZZINESS 10;
+#define FUZZINESS 20
 
 
 
@@ -95,9 +95,9 @@ void loop(void) {
 
   numberpulses = listenForIR();
 
-#ifdef DEBUG
+//#ifdef DEBUG
   printpulses();
-#endif
+//#endif
 
   
 
@@ -130,7 +130,7 @@ void loop(void) {
     Serial.println("1Button");
     digitalWrite(greenLED_PIN, HIGH);
     digitalWrite(redLED_PIN, LOW);
-    CCW();
+//    CCW1();
     digitalWrite(greenLED_PIN, LOW);
   }
     if (IRcompare(numberpulses, TwoButton,sizeof(TwoButton)/4)) {
@@ -138,7 +138,7 @@ void loop(void) {
     Serial.println("2Button");
     digitalWrite(greenLED_PIN, LOW);
     digitalWrite(redLED_PIN, HIGH);
-    CW();
+//    CW1();
     digitalWrite(redLED_PIN, LOW);
   }
 
@@ -359,19 +359,19 @@ int listenForIR(void) {
 
 void printpulses(void) {
 
-  Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
+//  Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
+//
+//  for (uint8_t i = 0; i < currentpulse; i++) {
+//
+//    Serial.print(pulses[i][0] * RESOLUTION, DEC);
+//
+//    Serial.print(" usec, ");
+//
+//    Serial.print(pulses[i][1] * RESOLUTION, DEC);
+//
+//    Serial.println(" usec");
 
-  for (uint8_t i = 0; i < currentpulse; i++) {
-
-    Serial.print(pulses[i][0] * RESOLUTION, DEC);
-
-    Serial.print(" usec, ");
-
-    Serial.print(pulses[i][1] * RESOLUTION, DEC);
-
-    Serial.println(" usec");
-
-  }
+//  }
 
   
 

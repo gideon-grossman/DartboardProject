@@ -31,7 +31,7 @@
 // http://arduino.cc/en/Hacking/PinMapping168 for the 'raw' pin mapping
 
 #define IRpin_PIN      PINC
-#define IRpin          8
+#define IRpin          0
 
 #define greenLED_PIN 13
 #define redLED_PIN  12
@@ -52,13 +52,13 @@
 
 // accurate timing
 
-#define RESOLUTION 20 
-#define DEBUG 1
+#define RESOLUTION 15
+
 
 
 // What percent we will allow in variation to match the same code
 
-#define FUZZINESS 10
+#define FUZZINESS 20
 
 
 
@@ -80,18 +80,21 @@ void setup(void) {
   Serial.begin(9600);
 
 //  Serial.println("Ready to decode IR!");
-//  pinMode(greenLED_PIN, OUTPUT);
-//  pinMode(redLED_PIN, OUTPUT);
+  pinMode(greenLED_PIN, OUTPUT);
+  pinMode(redLED_PIN, OUTPUT);
   MotorSetup();
 }
 
 
 //void loop(void){
-//  CW();
+//  CW_A();
+//  CW_B();
 //  delay(2000);
-//  CCW();
+//  CCW_A();
+//  CCW_B();
 //  delay(2000);
 //}
+
 
 void loop(void) {
 
@@ -101,9 +104,9 @@ void loop(void) {
 
   numberpulses = listenForIR();
 
-#ifdef DEBUG
+//#ifdef DEBUG
   printpulses();
-#endif
+//#endif
 
   
 
@@ -136,7 +139,8 @@ void loop(void) {
     Serial.println("1Button");
     digitalWrite(greenLED_PIN, HIGH);
     digitalWrite(redLED_PIN, LOW);
-    CCW();
+    CCW_A();
+    CCW_B();
     digitalWrite(greenLED_PIN, LOW);
   }
     if (IRcompare(numberpulses, TwoButton,sizeof(TwoButton)/4)) {
@@ -144,7 +148,8 @@ void loop(void) {
     Serial.println("2Button");
     digitalWrite(greenLED_PIN, LOW);
     digitalWrite(redLED_PIN, HIGH);
-    CW();
+    CW_A();
+    CW_B();
     digitalWrite(redLED_PIN, LOW);
   }
 
@@ -331,10 +336,10 @@ int listenForIR(void) {
        // pin is still LOW
 
        lowpulse++;
-//#ifdef DEBUG
-//       Serial.print("lowpulse: ");
-//       Serial.println(lowpulse);
-//#endif
+#ifdef DEBUG
+       Serial.print("lowpulse: ");
+       Serial.println(lowpulse);
+#endif
 
        delayMicroseconds(RESOLUTION);
 
@@ -355,29 +360,29 @@ int listenForIR(void) {
     // we read one high-low pulse successfully, continue!
 
     currentpulse++;
-//#ifdef DEBUG
-//    Serial.print("currentpulse: ");
-//    Serial.println(currentpulse);
-//#endif
+#ifdef DEBUG
+    Serial.print("currentpulse: ");
+    Serial.println(currentpulse);
+#endif
   }
 
 }
 
 void printpulses(void) {
 
-  Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
-
-  for (uint8_t i = 0; i < currentpulse; i++) {
-
-    Serial.print(pulses[i][0] * RESOLUTION, DEC);
-
-    Serial.print(" usec, ");
-
-    Serial.print(pulses[i][1] * RESOLUTION, DEC);
-
-    Serial.println(" usec");
-
-  }
+//  Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
+//
+//  for (uint8_t i = 0; i < currentpulse; i++) {
+//
+//    Serial.print(pulses[i][0] * RESOLUTION, DEC);
+//
+//    Serial.print(" usec, ");
+//
+//    Serial.print(pulses[i][1] * RESOLUTION, DEC);
+//
+//    Serial.println(" usec");
+//
+//  }
 
   
 

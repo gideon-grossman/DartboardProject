@@ -7,7 +7,9 @@
 #define PWM_DUTY_CYCLE 30
 void MotorSetup();
 void RecoverFromISD();
-void CW();
-void CCW();
+void CW1();
+void CCW1();
+void CW2();
+void CCW2();
 
 #endif //__MOTOR_H_
